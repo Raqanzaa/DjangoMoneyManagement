@@ -10,6 +10,11 @@ django-allauth = "*"
 djangorestframework-simplejwt = "*"
 scikit-learn = "*"
 pandas = "*"
+google-generativeai = "*"
+python-decouple = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
+pipenv-to-requirements = "*"
 
 [dev-packages]
 

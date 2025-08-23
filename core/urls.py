@@ -23,4 +23,5 @@ urlpatterns = [
     # This line includes all the URLs needed for login, logout, etc.
     path('accounts/', include('allauth.urls')),
     # We will add our own API urls later
+    path('api/', include('api.urls')),
 ]
