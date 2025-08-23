@@ -8,6 +8,28 @@ from .gemini_analyzer import generate_financial_plan
 from rest_framework import viewsets
 from .models import Transaction, Budget
 from .serializers import TransactionSerializer, BudgetSerializer
+from django.shortcuts import redirect
+from django.conf import settings
+from rest_framework_simplejwt.tokens import RefreshToken
+
+class GoogleLoginCallbackView(APIView):
+    # This view is protected, the user must be logged in to access it.
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # By the time the user gets here, they are already authenticated
+        # by django-allauth. We can now generate JWT tokens for them.
+        user = request.user
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
+        refresh_token = str(refresh)
+
+        # The URL for our React app's login success page
+        redirect_url = f"{settings.FRONTEND_URL}/login/success/"
+
+        # Redirect to the frontend, passing the tokens as query parameters
+        response = redirect(f"{redirect_url}?access_token={access_token}&refresh_token={refresh_token}")
+        return response
 
 class CategorizeTransactionView(APIView):
     # This ensures only logged-in users can access this endpoint.
