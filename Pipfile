@@ -17,6 +17,9 @@ dj-database-url = "*"
 pipenv-to-requirements = "*"
 django-cors-headers = "*"
 pillow = "*"
+django-celery-beat = "*"
+django-filter = "*"
+django-extensions = "*"
 
 [dev-packages]
 
